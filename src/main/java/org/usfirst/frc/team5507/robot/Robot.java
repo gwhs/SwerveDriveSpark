@@ -10,6 +10,7 @@ import org.usfirst.frc.team5507.robot.subsystems.Climber;
 import org.usfirst.frc.team5507.robot.subsystems.HatchDelivery;
 import org.usfirst.frc.team5507.robot.subsystems.Hook;
 import org.usfirst.frc.team5507.robot.subsystems.Limelight;
+import org.usfirst.frc.team5507.robot.subsystems.Pivot;
 import org.usfirst.frc.team5507.robot.subsystems.SwerveDriveSubsystem;
 
 import edu.wpi.first.wpilibj.Compressor;
@@ -39,6 +40,7 @@ public class Robot extends TimedRobot {
 	public static Limelight m_Limelight;
 	public static Cargo m_cargo;
 	public static Hook m_hook;
+	public static Pivot m_pivot;
 	public Compressor compressor;
 	public static Command m_autoCommand;
 	SendableChooser<Integer> m_autoChooser = new SendableChooser<>();
@@ -84,6 +86,7 @@ public class Robot extends TimedRobot {
 		m_HatchDelivery = new HatchDelivery();
 		m_cargo = new Cargo();
 		m_hook = new Hook();
+		m_pivot = new Pivot();
 		timer = new Timer();	
 		mOI = new OI(this);
 		mOI.registerControls();
