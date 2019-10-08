@@ -9,4 +9,10 @@
 
 # SwerveDriveSpark
 
-Hello
+Welcome to the George Washington High School robotics club 2019 source code!
+
+When making changes to this source code, please follow these rules and suggestions
+- If you see a security issue, or see strange activity, let a @gwhs/admin know.
+- Be professional and courteous in comments and chats.
+- Ask for help if you are not sure if you're doing a safe thing on the shared repository.  @gwhs/mentors will help
+- Share your ideas or possible changes in a branch.
