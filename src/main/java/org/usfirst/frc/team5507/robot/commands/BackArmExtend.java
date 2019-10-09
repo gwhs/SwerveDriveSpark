@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class BackArmExtend extends Command {
   private boolean isEnded;
   private double angle;
-  Timer test = new Timer();
+  private Timer test = new Timer();
     
   public BackArmExtend() {
     // Use requires() here to declare subsystem dependencies

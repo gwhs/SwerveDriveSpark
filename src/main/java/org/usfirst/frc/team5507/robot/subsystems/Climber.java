@@ -93,7 +93,10 @@ public class Climber extends Subsystem {
 
   public void printGyro()
   { //wrong axis. XY angle not Z angle
-    SmartDashboard.putNumber("Gyro Angle", Robot.swerveDriveSubsystem.mNavX.getAngle());
+    SmartDashboard.putNumber("Get Angle", (double)Robot.swerveDriveSubsystem.mNavX.getAngle());
+    SmartDashboard.putNumber("Pitch Angle", (double)Robot.swerveDriveSubsystem.mNavX.getPitch());
+    SmartDashboard.putNumber("Yaw Angle", (double)Robot.swerveDriveSubsystem.mNavX.getYaw());
+    SmartDashboard.putNumber("Roll Angle", (double)Robot.swerveDriveSubsystem.mNavX.getAngle());
   }
 
   public void stop() { //when pressed
