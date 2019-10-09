@@ -60,6 +60,8 @@ public class OI {
 		
 		climbController.getAButton().whileHeld(new PivotDown());
 		climbController.getAButton().whenReleased(new PivotUp());
+
+		climbController.getXButton().whenPressed(new BackArmExtend());
 	}
 
 	public IGamepad getController() {

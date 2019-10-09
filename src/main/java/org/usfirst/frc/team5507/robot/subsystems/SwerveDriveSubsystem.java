@@ -14,7 +14,7 @@ public class SwerveDriveSubsystem extends HolonomicDrivetrain {
 	private static final double WHEELBASE = 21.5;
 	private static final double TRACKWIDTH = 23;
 	private static final double RATIO = Math.sqrt(Math.pow(WHEELBASE, 2) + Math.pow(TRACKWIDTH, 2));
-
+	
 	/*
 	 * 0 is Front Right
 	 * 1 is Front Left
@@ -28,7 +28,8 @@ public class SwerveDriveSubsystem extends HolonomicDrivetrain {
 		new SwerveDriveModule(3, new TalonSRX(11), new CANSparkMax(2, MotorType.kBrushless), 355) //real: 355 practice: 190
 	};
 
-	private AHRS mNavX = new AHRS(SPI.Port.kMXP, (byte) 200);
+	public AHRS mNavX = new AHRS(SPI.Port.kMXP, (byte) 200);
+	
 
 	public SwerveDriveSubsystem() {
 		zeroGyro(); 
