@@ -96,7 +96,7 @@ public class Climber extends Subsystem {
     SmartDashboard.putNumber("Get Angle", (double)Robot.swerveDriveSubsystem.mNavX.getAngle());
     SmartDashboard.putNumber("Pitch Angle", (double)Robot.swerveDriveSubsystem.mNavX.getPitch());
     SmartDashboard.putNumber("Yaw Angle", (double)Robot.swerveDriveSubsystem.mNavX.getYaw());
-    SmartDashboard.putNumber("Roll Angle", (double)Robot.swerveDriveSubsystem.mNavX.getAngle());
+    SmartDashboard.putNumber("Roll Angle", (double)Robot.swerveDriveSubsystem.mNavX.getRoll());
   }
 
   public void stop() { //when pressed
