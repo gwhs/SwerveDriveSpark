@@ -7,41 +7,40 @@
 
 package org.usfirst.frc.team5507.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.command.Command;
-
 import org.usfirst.frc.team5507.robot.Robot;
 
-import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.command.Command;
 
-public class FrontArmDown extends Command {
-  private boolean isEnded;
-  private Timer time = new Timer();
-
-  public FrontArmDown() {
-    requires(Robot.m_climber);
+public class BackArmToBottomLimit extends Command {
+  private static boolean isEnded;
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
+  public BackArmToBottomLimit()
+  {
     isEnded = false;
-  };
+  }
+  public void backArmToBottomLimit()
+  {
+    if (Robot.m_climber.getForwardLimit() == true)  //Bottom Limit
+    {
+      isEnded = true;
+    }
+    else
+    {
+      Robot.m_climber.moveArm2(.1);
+    }
+  }
+
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    time.reset();
-    time.start();
+    isEnded = false;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-   // if (time.get() < 3) //angle is not accurate, just a placeholder
-   if (Robot.swerveDriveSubsystem.mNavX.getRoll() < 8) 
-   {
-      Robot.m_climber.moveArm1(-.25); //speed not accurate, just a placeholder too ;D
-    }
-    else
-    {
-      Robot.m_climber.stopArm1();
-      isEnded = true;
-    }
+    backArmToBottomLimit();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -56,7 +55,7 @@ public class FrontArmDown extends Command {
     Robot.m_climber.stop();
     isEnded = false;
   }
-//comment
+
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override

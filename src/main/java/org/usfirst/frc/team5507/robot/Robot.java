@@ -123,6 +123,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotPeriodic() {
 		m_climber.printLimit(); // prints limit switch values to SmartDashboard.
+		m_climber.printGyro();
 		SmartDashboard.putNumber("Adjusted Drivetrain Angle", swerveDriveSubsystem.getGyroAngle());
 		SmartDashboard.putNumber("Raw Drivetrain Angle", swerveDriveSubsystem.getRawGyroAngle());
 		SmartDashboard.putNumber("Drivetrain Rate", swerveDriveSubsystem.getGyroRate());
