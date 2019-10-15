@@ -14,7 +14,6 @@ import org.usfirst.frc.team5507.robot.Robot;
 import com.kauailabs.navx.frc.AHRS;
 
 public class FrontArmDown extends Command {
-  private AHRS mNavX = new AHRS(SPI.Port.kMXP, (byte) 200);
   public FrontArmDown() {
     requires(Robot.m_climber);
   };
@@ -26,14 +25,14 @@ public class FrontArmDown extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (mNavX.getAngle() < 30) //angle is not accurate, just a placeholder
+   /*  if (mNavX.getAngle() < 30) //angle is not accurate, just a placeholder
     {
       Robot.m_climber.moveArm1(1); //speed not accurate, just a placeholder too ;D
     }
     else
     {
       Robot.m_climber.stopArm1();
-    }
+    } */
   }
 
   // Make this return true when this Command no longer needs to run execute()

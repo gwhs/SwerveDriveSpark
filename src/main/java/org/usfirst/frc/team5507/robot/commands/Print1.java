@@ -9,61 +9,52 @@ package org.usfirst.frc.team5507.robot.commands;
 
 import org.usfirst.frc.team5507.robot.Robot;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class BackArmExtend extends Command {
-  private boolean isEnded;
-  private double angle;
-  private Timer test = new Timer();
-  private final double SPEED_CONSTANT = 0.03;
-    
-  public BackArmExtend() {
+import edu.wpi.first.wpilibj.Timer;
+
+public class Print1 extends Command {
+  private Timer clock = new Timer();
+  private boolean end;
+  public Print1() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_climber);
-    isEnded = false;
-    angle = (double)Robot.swerveDriveSubsystem.mNavX.getRoll();
+    end = false; 
   }
 
   // Called just before this Command runs the first time
-  @Override
+  @Override //print "hello"
   protected void initialize() {
-    test.reset();
-    test.start();
+    System.out.println("Hello");
+    clock.start();
+    end = false;
   }
 
   // Called repeatedly when this Command is scheduled to run
-  @Override
+  @Override //print time for 3 seconds using TIMER class
   protected void execute() {
-    angle = (double)Robot.swerveDriveSubsystem.mNavX.getRoll();
-    System.out.println(angle);
-    Robot.m_climber.moveArm2(.3);//maybe wrong direction //swtich to new method "backArmToTopLimit"
-    double frontArmSpeed;
-    if(Robot.swerveDriveSubsystem.mNavX.getRoll() < 1.5)
+    if(clock.get() > 1)
     {
-      frontArmSpeed = 0;
+     System.out.println(clock.get());
     }
-    else
+    if(clock.get() > 3)
     {
-      frontArmSpeed = -SPEED_CONSTANT*Robot.swerveDriveSubsystem.mNavX.getRoll();
+      end = true;
     }
-    System.out.println("Front arm Speed: " + frontArmSpeed);
-    Robot.m_climber.moveArm1(frontArmSpeed);
-    isEnded = Robot.m_climber.getReverseLimit();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return isEnded;
+    return end;
   }
 
   // Called once after isFinished returns true
-  @Override
+  @Override //print "world"
   protected void end() {
-    Robot.m_climber.stop();
-    isEnded = false;
+    System.out.println("World");
+    clock.reset();
   }
 
   // Called when another command which requires one or more of the same
