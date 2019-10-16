@@ -37,7 +37,7 @@ public class Climber extends Subsystem {
   private static CANDigitalInput arm2R = new CANDigitalInput(arm2, CANDigitalInput.LimitSwitch.kReverse, LimitSwitchPolarity.kNormallyOpen);
   private static CANDigitalInput arm1R = new CANDigitalInput(arm1, CANDigitalInput.LimitSwitch.kReverse, LimitSwitchPolarity.kNormallyOpen);
   private static CANDigitalInput arm1F = new CANDigitalInput(arm1, CANDigitalInput.LimitSwitch.kForward, LimitSwitchPolarity.kNormallyOpen);
-  private final double GEARBOX_RATIO = 400; 
+  private final double GEARBOX_RATIO = 400;
   
   @Override
   public void initDefaultCommand() {
