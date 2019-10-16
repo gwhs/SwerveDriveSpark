@@ -9,51 +9,35 @@ package org.usfirst.frc.team5507.robot.commands;
 
 import org.usfirst.frc.team5507.robot.Robot;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class FrontArmMatch extends Command {
+public class FrontArmToLimit extends Command {
   private boolean isEnded;
-  private double angle;
-  private Timer test = new Timer();
-  private final double SPEED_CONSTANT = 0.035;
-    
-  public FrontArmMatch() {
+  public FrontArmToLimit() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_climber);
     isEnded = false;
-    angle = (double)Robot.swerveDriveSubsystem.mNavX.getRoll();
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    test.reset();
-    test.start();
+    isEnded = false;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    angle = (double)Robot.swerveDriveSubsystem.mNavX.getRoll();
-    System.out.println("Angle: " + angle);
-    double frontArmSpeed;
-    double handSpeed;
-    if(Math.abs(Robot.swerveDriveSubsystem.mNavX.getRoll()) < 1.5)
+    if(isEnded == false)
     {
-      frontArmSpeed = 0;
-      handSpeed = 0;
+      Robot.m_climber.moveArm1(0.2);
     }
-    else
-    {
-      frontArmSpeed = -Math.abs(SPEED_CONSTANT*Robot.swerveDriveSubsystem.mNavX.getRoll());
-      handSpeed = .3;
+    else{
+      isEnded = true;
     }
-    System.out.println("Front arm Speed: " + frontArmSpeed);
-    Robot.m_climber.moveArm1(frontArmSpeed);
-    Robot.m_climber.moveHand1(handSpeed);
-    isEnded = Robot.m_climber.getReverseLimit();
+    isEnded = Robot.m_climber.getArm1ForwardLimit();
+    
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -65,8 +49,7 @@ public class FrontArmMatch extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_climber.stop();
-    isEnded = false;
+    Robot.m_climber.moveArm1(0);
   }
 
   // Called when another command which requires one or more of the same
