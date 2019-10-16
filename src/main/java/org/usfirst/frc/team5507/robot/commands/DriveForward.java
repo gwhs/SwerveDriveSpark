@@ -22,9 +22,9 @@ public class DriveForward extends Command {
 
   public void driveForward()
   {
-    if (Robot.m_climber.getForwardLimit() && time.get() < 4.5)
+    if (time.get() < 1.5)
     {
-      //Robot.m_climber.moveHand1(.1);
+      //Robot.m_climber.moveHand1(.7);
       System.out.println("moving");
     }    
     else
@@ -57,7 +57,7 @@ public class DriveForward extends Command {
   @Override
   protected void end() {
     Robot.m_climber.stop();
-    isEnded = true;
+    isEnded = false;
     System.out.println("destroy are ended");
   }
 
