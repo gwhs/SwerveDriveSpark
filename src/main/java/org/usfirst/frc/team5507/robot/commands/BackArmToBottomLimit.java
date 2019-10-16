@@ -28,6 +28,7 @@ public class BackArmToBottomLimit extends Command {
     else
     {
       Robot.m_climber.moveArm2(.1);
+      //System.out.println("Hello, Winnie & Rachel.");
     }
   }
 
@@ -54,6 +55,7 @@ public class BackArmToBottomLimit extends Command {
   protected void end() {
     Robot.m_climber.stop();
     isEnded = false;
+    //System.out.println("Ended");
   }
 
   // Called when another command which requires one or more of the same

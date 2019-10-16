@@ -9,38 +9,42 @@ package org.usfirst.frc.team5507.robot.commands;
 
 import org.usfirst.frc.team5507.robot.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class BackArmToTopLimit extends Command {
+public class DriveForward extends Command {
   private static boolean isEnded;
+  private Timer time = new Timer();
 
-  public BackArmToTopLimit()
-  {
+  public DriveForward() {
     isEnded = false;
   }
-  
-  public void backArmToTopLimit()
+
+  public void driveForward()
   {
-    if (Robot.m_climber.getReverseLimit() == true)  //Top Limit
+    if (time.get() < 1.5)
     {
-      isEnded = true;
-    }
+      //Robot.m_climber.moveHand1(.7);
+      System.out.println("moving");
+    }    
     else
     {
-      Robot.m_climber.moveArm2(-.55);
+      isEnded = true;
+      System.out.println("ended");
     }
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    isEnded = false;
+    time.reset();
+    time.start();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    backArmToTopLimit();
+    driveForward();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -54,7 +58,7 @@ public class BackArmToTopLimit extends Command {
   protected void end() {
     Robot.m_climber.stop();
     isEnded = false;
-    //System.out.println("Ended");
+    System.out.println("destroy are ended");
   }
 
   // Called when another command which requires one or more of the same
