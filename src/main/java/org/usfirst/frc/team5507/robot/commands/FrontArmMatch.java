@@ -12,13 +12,13 @@ import org.usfirst.frc.team5507.robot.Robot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class BackArmExtend extends Command {
+public class FrontArmMatch extends Command {
   private boolean isEnded;
   private double angle;
   private Timer test = new Timer();
-  private final double SPEED_CONSTANT = 0.03;
+  private final double SPEED_CONSTANT = 0.035;
     
-  public BackArmExtend() {
+  public FrontArmMatch() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_climber);
@@ -37,16 +37,15 @@ public class BackArmExtend extends Command {
   @Override
   protected void execute() {
     angle = (double)Robot.swerveDriveSubsystem.mNavX.getRoll();
-    System.out.println(angle);
-    Robot.m_climber.moveArm2(.3);//maybe wrong direction //swtich to new method "backArmToTopLimit"
+    System.out.println("Angle: " + angle);
     double frontArmSpeed;
-    if(Robot.swerveDriveSubsystem.mNavX.getRoll() < 1.5)
+    if(Math.abs(Robot.swerveDriveSubsystem.mNavX.getRoll()) < 1.5)
     {
       frontArmSpeed = 0;
     }
     else
     {
-      frontArmSpeed = -SPEED_CONSTANT*Robot.swerveDriveSubsystem.mNavX.getRoll();
+      frontArmSpeed = -Math.abs(SPEED_CONSTANT*Robot.swerveDriveSubsystem.mNavX.getRoll());
     }
     System.out.println("Front arm Speed: " + frontArmSpeed);
     Robot.m_climber.moveArm1(frontArmSpeed);

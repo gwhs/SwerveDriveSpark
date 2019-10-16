@@ -34,7 +34,7 @@ public class ClimberMoveArms extends Command {
     double speed1 = deadband(Robot.getOI().getClimberController().getLeftYValue());
     double speed2 = deadband(Robot.getOI().getClimberController().getRightYValue());
     Robot.m_climber.moveArms(speed1, speed2);
-    if(speed1 < 0) Robot.m_climber.moveHand1(0.1);
+    if(speed1 < 0) Robot.m_climber.moveHand1(0.25);
     else {
       Robot.m_climber.moveHand1(0);
     }
