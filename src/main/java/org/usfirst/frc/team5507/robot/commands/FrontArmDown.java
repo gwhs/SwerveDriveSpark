@@ -33,9 +33,9 @@ public class FrontArmDown extends Command {
   @Override
   protected void execute() {
    // if (time.get() < 3) //angle is not accurate, just a placeholder
-   if (Robot.swerveDriveSubsystem.mNavX.getRoll() < 8) 
+   if (Robot.swerveDriveSubsystem.mNavX.getRoll() < 6) 
    {
-      Robot.m_climber.moveArm1(-.25); //speed not accurate, just a placeholder too ;D
+      Robot.m_climber.moveArm1(-1); //speed not accurate, just a placeholder too ;D
     }
     else
     {

@@ -9,10 +9,12 @@ package org.usfirst.frc.team5507.robot.commands;
 
 import org.usfirst.frc.team5507.robot.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class FrontArmToLimit extends Command {
   private boolean isEnded;
+  private Timer time = new Timer();
   public FrontArmToLimit() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -24,6 +26,8 @@ public class FrontArmToLimit extends Command {
   @Override
   protected void initialize() {
     isEnded = false;
+    time.reset();
+    time.start();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -31,13 +35,9 @@ public class FrontArmToLimit extends Command {
   protected void execute() {
     if(isEnded == false)
     {
-      Robot.m_climber.moveArm1(0.2);
-    }
-    else{
-      isEnded = true;
+      Robot.m_climber.moveArm1(0.5);
     }
     isEnded = Robot.m_climber.getArm1ForwardLimit();
-    
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -50,6 +50,8 @@ public class FrontArmToLimit extends Command {
   @Override
   protected void end() {
     Robot.m_climber.moveArm1(0);
+    time.stop();
+    time.reset();
   }
 
   // Called when another command which requires one or more of the same

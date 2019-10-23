@@ -22,15 +22,15 @@ public class DriveForward extends Command {
 
   public void driveForward()
   {
-    if (time.get() < 1.5)
+    if (time.get() < 2)
     {
-      //Robot.m_climber.moveHand1(.7);
-      System.out.println("moving");
+      Robot.m_climber.moveHand1(.7);
+     
     }    
     else
     {
       isEnded = true;
-      System.out.println("ended");
+      
     }
   }
 
@@ -58,7 +58,7 @@ public class DriveForward extends Command {
   protected void end() {
     Robot.m_climber.stop();
     isEnded = false;
-    System.out.println("destroy are ended");
+    
   }
 
   // Called when another command which requires one or more of the same

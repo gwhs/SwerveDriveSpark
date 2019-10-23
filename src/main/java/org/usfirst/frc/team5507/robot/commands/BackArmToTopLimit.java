@@ -27,7 +27,7 @@ public class BackArmToTopLimit extends Command {
     }
     else
     {
-      Robot.m_climber.moveArm2(-.55);
+      Robot.m_climber.moveArm2(-1);
     }
   }
 

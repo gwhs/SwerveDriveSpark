@@ -16,7 +16,7 @@ public class FrontArmMatch extends Command {
   private boolean isEnded;
   private double angle;
   private Timer test = new Timer();
-  private final double SPEED_CONSTANT = 0.035;
+  private final double SPEED_CONSTANT = 0.095;
     
   public FrontArmMatch() {
     // Use requires() here to declare subsystem dependencies
@@ -40,15 +40,15 @@ public class FrontArmMatch extends Command {
     System.out.println("Angle: " + angle);
     double frontArmSpeed;
     double handSpeed;
-    if(Math.abs(Robot.swerveDriveSubsystem.mNavX.getRoll()) < 1.5)
+    if(Robot.swerveDriveSubsystem.mNavX.getRoll() > 1.5)
     {
-      frontArmSpeed = 0;
+      frontArmSpeed = .1;
       handSpeed = 0;
     }
     else
     {
-      frontArmSpeed = -Math.abs(SPEED_CONSTANT*Robot.swerveDriveSubsystem.mNavX.getRoll());
-      handSpeed = .3;
+      frontArmSpeed = SPEED_CONSTANT*Robot.swerveDriveSubsystem.mNavX.getRoll();
+      handSpeed = .15;
     }
     System.out.println("Front arm Speed: " + frontArmSpeed);
     Robot.m_climber.moveArm1(frontArmSpeed);
