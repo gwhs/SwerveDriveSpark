@@ -21,16 +21,9 @@ public class AutoClimb extends CommandGroup {
    addSequential(new FrontArmDown());
     addParallel(new FrontArmMatch());
     addSequential(new BackArmToTopLimit());
-<<<<<<< HEAD
     //move forward w/ hands + front arm retract
     addSequential(new DriveForward());
     //  + back arm retract
-=======
-    addSequential(new DriveForward()); //move forward w/ hands
-    addParallel(new FrontArmToLimit()); // front arm retract + back arm retract
-    addSequential(new BackArmToBottomLimit()); 
-    
->>>>>>> 850e8719b0ff98bc362a4317250fcd21a62e5469
 
     // To run multiple commands at the same time,
     // use addParallel()
