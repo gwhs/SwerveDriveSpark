@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class BackArmToTopLimit extends Command {
   private static boolean isEnded;
-
+  private final double BACK_ARM_SPEED = -1;
   public BackArmToTopLimit()
   {
     isEnded = false;
@@ -27,7 +27,7 @@ public class BackArmToTopLimit extends Command {
     }
     else
     {
-      Robot.m_climber.moveArm2(-1);
+      Robot.m_climber.moveArm2(BACK_ARM_SPEED);
     }
   }
 

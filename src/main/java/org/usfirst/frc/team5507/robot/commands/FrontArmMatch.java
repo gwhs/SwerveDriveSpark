@@ -16,7 +16,8 @@ public class FrontArmMatch extends Command {
   private boolean isEnded;
   private double angle;
   private Timer test = new Timer();
-  private final double SPEED_CONSTANT = 0.095;
+  private final double SPEED_CONSTANT = 0.1;
+  private final double ROLL_LIMIT = 1.5;
     
   public FrontArmMatch() {
     // Use requires() here to declare subsystem dependencies
@@ -40,7 +41,7 @@ public class FrontArmMatch extends Command {
     System.out.println("Angle: " + angle);
     double frontArmSpeed;
     double handSpeed;
-    if(Robot.swerveDriveSubsystem.mNavX.getRoll() > 1.5)
+    if(Robot.swerveDriveSubsystem.mNavX.getRoll() > ROLL_LIMIT)
     {
       frontArmSpeed = .1;
       handSpeed = 0;

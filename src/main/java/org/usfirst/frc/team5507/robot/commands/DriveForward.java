@@ -15,6 +15,8 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DriveForward extends Command {
   private static boolean isEnded;
   private Timer time = new Timer();
+  private double driveTime = 2.75;
+  private double armSpeed = .7;
 
   public DriveForward() {
     isEnded = false;
@@ -22,9 +24,9 @@ public class DriveForward extends Command {
 
   public void driveForward()
   {
-    if (time.get() < 2)
+    if (time.get() < driveTime)
     {
-      Robot.m_climber.moveHand1(.7);
+      Robot.m_climber.moveHand1(armSpeed);
      
     }    
     else
