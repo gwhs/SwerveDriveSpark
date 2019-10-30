@@ -12,28 +12,38 @@ import org.usfirst.frc.team5507.robot.Robot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class DriveForward extends Command {
-  private static boolean isEnded;
+public class WheelsDriveForwardTest extends Command {
   private Timer time = new Timer();
-  private double driveTime = 2.75;
+  private static boolean isEnded;
+  private double driveTime = 1;
   private double armSpeed = .7;
-
-  public DriveForward() {
-    isEnded = false;
+  private double d1;
+  private double startAngle;
+  private double speed;
+  public static final double WHEEL_CIRCUMFERENCE = 4 * Math.PI;
+  public static final double TOTAL_SENSOR_POS = 1024;
+  public static final double DISTANCE = WHEEL_CIRCUMFERENCE / TOTAL_SENSOR_POS;
+ 
+  
+  public WheelsDriveForwardTest(double d, double speed) {
+      isEnded = false;
+      Robot.swerveDriveSubsystem.setFieldOriented(false);
+      requires(Robot.swerveDriveSubsystem);
+      d1 = DISTANCE * d * 12;
+      this.speed = speed;
   }
 
-  public void driveForward()
+  public void driveForward() 
   {
-    if (time.get() < driveTime)
+    if(time.get() < driveTime)
     {
       Robot.m_climber.moveHand1(armSpeed);
-     
-    }    
-    else
-    {
-      isEnded = true;
-      
     }
+    Robot.m_climber.stop();
+    Robot.swerveDriveSubsystem.driveForwardDistance(d1, startAngle, 0.5);
+    isEnded = true;
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
   }
 
   // Called just before this Command runs the first time
@@ -41,12 +51,13 @@ public class DriveForward extends Command {
   protected void initialize() {
     time.reset();
     time.start();
+    startAngle = Robot.swerveDriveSubsystem.getNavX().getYaw();
+    Robot.swerveDriveSubsystem.resetAllEncoders();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    driveForward();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -58,9 +69,7 @@ public class DriveForward extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_climber.stop();
     isEnded = false;
-    
   }
 
   // Called when another command which requires one or more of the same
