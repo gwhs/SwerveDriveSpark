@@ -65,7 +65,7 @@ public class OI {
 
 		//climbController.getXButton().whenPressed(new FrontArmMatch());
 		//climbController.getXButton().whenPressed(new AutoClimb());
-		climbcontroller.getXButton().whenPressed(new WheelsDriveForwardTest(1, 0.5));
+		climbController.getXButton().whenPressed(new WheelsDriveForwardTest(1, 0.5));
 	}
 	public IGamepad getController() {
 		return mController;

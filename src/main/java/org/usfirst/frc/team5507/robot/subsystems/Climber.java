@@ -157,7 +157,7 @@ public class Climber extends Subsystem {
   }
 
    public void moveHandsPosition(double Position) {
-     NPidController3.setP(.05);
+     NPidController3.setP(.1);
      NPidController3.setI(.000001);
      NPidController3.setFF(0);
      NPidController3.setReference(Position, ControlType.kPosition);

@@ -31,7 +31,7 @@ public class MoveHandsDistance extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_climber.NPidController3.setReference(pos, ControlType.kPosition);
+    Robot.m_climber.moveHandsPosition(pos);
   }
 
   // Make this return true when this Command no longer needs to run execute()
