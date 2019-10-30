@@ -31,8 +31,10 @@ public class Climber extends Subsystem {
   private static CANSparkMax hand = new CANSparkMax(15, MotorType.kBrushless);
   private static CANEncoder NEncoder1 = new CANEncoder(arm1);
   private static CANEncoder NEncoder2 = new CANEncoder(arm2);
+  public static CANEncoder NEncoder3 = new CANEncoder(hand);
   private static CANPIDController NPidController1 = new CANPIDController(arm1);
   private static CANPIDController NPidController2 = new CANPIDController(arm2);
+  public static CANPIDController NPidController3 = new CANPIDController(hand);
   private static CANDigitalInput arm2F = new CANDigitalInput(arm2, CANDigitalInput.LimitSwitch.kForward, LimitSwitchPolarity.kNormallyOpen);
   private static CANDigitalInput arm2R = new CANDigitalInput(arm2, CANDigitalInput.LimitSwitch.kReverse, LimitSwitchPolarity.kNormallyOpen);
   private static CANDigitalInput arm1R = new CANDigitalInput(arm1, CANDigitalInput.LimitSwitch.kReverse, LimitSwitchPolarity.kNormallyOpen);
@@ -97,6 +99,8 @@ public class Climber extends Subsystem {
     SmartDashboard.putNumber("Pitch Angle", (double)Robot.swerveDriveSubsystem.mNavX.getPitch());
     SmartDashboard.putNumber("Yaw Angle", (double)Robot.swerveDriveSubsystem.mNavX.getYaw());
     SmartDashboard.putNumber("Roll Angle", (double)Robot.swerveDriveSubsystem.mNavX.getRoll());
+    SmartDashboard.putNumber("Hand Position", NEncoder3.getPosition());
+
   }
 
   public void stop() { //when pressed
@@ -151,5 +155,12 @@ public class Climber extends Subsystem {
   public void stopHand() {
     hand.set(0);
   }
+
+   public void moveHandsPosition(double Position) {
+     NPidController3.setP(.05);
+     NPidController3.setI(.000001);
+     NPidController3.setFF(0);
+     NPidController3.setReference(Position, ControlType.kPosition);
+   }
 }
 
