@@ -27,7 +27,6 @@ public class WheelsDriveForwardTest extends Command {
   
   public WheelsDriveForwardTest(double d, double speed) {
       isEnded = false;
-      Robot.swerveDriveSubsystem.setFieldOriented(false);
       requires(Robot.swerveDriveSubsystem);
       d1 = DISTANCE * d * 12;
       this.speed = speed;
@@ -40,6 +39,7 @@ public class WheelsDriveForwardTest extends Command {
       Robot.m_climber.moveHand1(armSpeed);
     }
     Robot.m_climber.stop();
+    System.out.println("Field orientation is " + (Robot.swerveDriveSubsystem.isFieldOriented() ? "true" : "false"));
     Robot.swerveDriveSubsystem.driveForwardDistance(d1, startAngle, 0.5);
     isEnded = true;
     // Use requires() here to declare subsystem dependencies
@@ -53,11 +53,14 @@ public class WheelsDriveForwardTest extends Command {
     time.start();
     startAngle = Robot.swerveDriveSubsystem.getNavX().getYaw();
     Robot.swerveDriveSubsystem.resetAllEncoders();
+    Robot.swerveDriveSubsystem.setFieldOriented(false);
+
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    driveForward();
   }
 
   // Make this return true when this Command no longer needs to run execute()
