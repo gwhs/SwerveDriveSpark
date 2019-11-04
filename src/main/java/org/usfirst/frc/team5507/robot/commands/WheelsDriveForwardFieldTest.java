@@ -18,7 +18,7 @@ public class WheelsDriveForwardFieldTest extends CommandGroup {
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
     // these will run in order.
-    addSequential(new WheelsDriveForwardTest(1, 0.5));
+    addSequential(new WheelsDriveForwardTest(6, 0.5));
 
 
     // To run multiple commands at the same time,
