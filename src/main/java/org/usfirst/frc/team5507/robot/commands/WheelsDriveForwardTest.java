@@ -34,13 +34,15 @@ public class WheelsDriveForwardTest extends Command {
 
   public void driveForward() 
   {
+    /*
     if(time.get() < driveTime)
     {
       Robot.m_climber.moveHand1(armSpeed);
     }
     Robot.m_climber.stop();
+    */
     System.out.println("Field orientation is " + (Robot.swerveDriveSubsystem.isFieldOriented() ? "true" : "false"));
-    Robot.swerveDriveSubsystem.driveForwardDistance(d1, startAngle, 0.5);
+    Robot.swerveDriveSubsystem.driveForwardDistance(d1, startAngle, speed);
     isEnded = true;
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -73,6 +75,7 @@ public class WheelsDriveForwardTest extends Command {
   @Override
   protected void end() {
     isEnded = false;
+    time.stop();
   }
 
   // Called when another command which requires one or more of the same
