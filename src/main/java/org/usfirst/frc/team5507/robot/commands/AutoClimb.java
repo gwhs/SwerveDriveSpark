@@ -25,7 +25,9 @@ public class AutoClimb extends CommandGroup {
     addSequential(new MoveHandsDistance(122.2));
     addParallel(new WheelsDriveForwardTest(6, 1000));//fix speed
     addSequential(new FrontArmToLimit());
-    //  + back arm retract
+    
+    addSequential(new BackArmToBottomLimit());
+    
 
 
     // To run multiple commands at the same time,
