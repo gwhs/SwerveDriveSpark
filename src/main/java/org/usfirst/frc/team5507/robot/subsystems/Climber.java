@@ -60,6 +60,16 @@ public class Climber extends Subsystem {
     return NPidController2;
   }
 
+  public CANPIDController getPIDControllerHand()
+  {
+    return NPidController3;
+  }
+
+  public CANEncoder getHandEncoder()
+  {
+    return NEncoder3;
+  }
+
   public boolean getForwardLimit() // bottom
   {
     return arm2F.get();

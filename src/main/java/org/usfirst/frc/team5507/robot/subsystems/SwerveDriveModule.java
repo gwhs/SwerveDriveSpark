@@ -5,7 +5,9 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANEncoder;
+import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -26,8 +28,10 @@ public class SwerveDriveModule extends Subsystem {
 	private final double mZeroOffset;
 
     private final CANEncoder mDriveEncoder;
-	private final TalonSRX mAngleMotor;
-    private final CANSparkMax mDriveMotor;
+    private final CANPIDController mPIDController;
+    private final TalonSRX mAngleMotor;
+    public final CANSparkMax mDriveMotor;
+
     
     private double zeroPos;
 
@@ -37,7 +41,7 @@ public class SwerveDriveModule extends Subsystem {
 		mAngleMotor = angleMotor;
         mDriveMotor = driveMotor;
         mDriveEncoder = mDriveMotor.getEncoder();
-
+        mPIDController = mDriveMotor.getPIDController();
         mZeroOffset = zeroOffset;
         zeroPos = mDriveEncoder.getPosition();
 
@@ -53,7 +57,9 @@ public class SwerveDriveModule extends Subsystem {
            
 
             driveMotor.setIdleMode(IdleMode.kBrake);
-
+            mPIDController.setP(0.02);  //0.00001 working value. we keep it.
+            mPIDController.setI(0.000001); //.0000001
+            mPIDController.setD(0.0065);
 
 	        // Set amperage limits
 	        angleMotor.configContinuousCurrentLimit(30, 0);
@@ -156,6 +162,21 @@ public class SwerveDriveModule extends Subsystem {
         mAngleMotor.set(ControlMode.Position, targetAngle);
     }
 
+    public void setTargetDistance(double distance) { // inches
+        //    	if(angleMotorJam) {
+        //    		mDriveMotor.set(ControlMode.Disabled, 0);
+        //    		return;
+        //    	}
+        //        distance /= 2 * Math.PI * driveWheelRadius; // to wheel rotations
+        //        distance *= driveGearRatio; // to encoder rotations
+        //        distance *= 80; // to encoder ticks
+                //distance = inchesToEncoderTicks(distance);
+                //SmartDashboard.putNumber("Module Ticks " + moduleNumber, distance);
+                mPIDController.setReference(distance, ControlType.kPosition);
+                
+
+            }
+
 
     public void setTargetSpeed(double speed) {
         mDriveMotor.set(speed);
@@ -178,7 +199,7 @@ public class SwerveDriveModule extends Subsystem {
     }
 
     public int inchesToEncoderTicks(double inches) {
-         return (int) Math.round(inches * 35.6);
+         return (int) Math.round(inches * 64);
     }
 
     public double getInches() {
@@ -188,5 +209,13 @@ public class SwerveDriveModule extends Subsystem {
     public double getDriveDistance() { 
         double ticks = mDriveEncoder.getPosition();
         return encoderTicksToInches(ticks);
+    }
+
+    public CANPIDController getPIDController() {
+        return mPIDController;
+    }
+
+    public void printTick() {
+        SmartDashboard.putNumber("Ticks" + mModuleNumber, mDriveEncoder.getPosition());
     }
 }

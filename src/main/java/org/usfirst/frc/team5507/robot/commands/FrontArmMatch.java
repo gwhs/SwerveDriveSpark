@@ -16,7 +16,7 @@ public class FrontArmMatch extends Command {
   private boolean isEnded;
   private double angle;
   private Timer test = new Timer();
-  private final double SPEED_CONSTANT = 0.1;
+  private final double SPEED_CONSTANT = 0.115;
   private final double ROLL_LIMIT = 1.5;
     
   public FrontArmMatch() {

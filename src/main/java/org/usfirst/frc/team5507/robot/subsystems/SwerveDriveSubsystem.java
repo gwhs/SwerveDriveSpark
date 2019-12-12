@@ -1,5 +1,6 @@
 package org.usfirst.frc.team5507.robot.subsystems;
 
+import org.usfirst.frc.team5507.robot.Robot;
 import org.usfirst.frc.team5507.robot.input.XboxGamepad;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -14,6 +15,10 @@ public class SwerveDriveSubsystem extends HolonomicDrivetrain {
 	private static final double WHEELBASE = 21.5;
 	private static final double TRACKWIDTH = 23;
 	private static final double RATIO = Math.sqrt(Math.pow(WHEELBASE, 2) + Math.pow(TRACKWIDTH, 2));
+	public SwerveDriveModule m1 = new SwerveDriveModule(0, new TalonSRX(12), new CANSparkMax(4, MotorType.kBrushless), 390); //real:390 practice: 212
+	public SwerveDriveModule m2 = new SwerveDriveModule(1, new TalonSRX(13), new CANSparkMax(5, MotorType.kBrushless), 293); //real:293 practice: 59
+	public SwerveDriveModule m3 = new SwerveDriveModule(2, new TalonSRX(10), new CANSparkMax(3, MotorType.kBrushless), 298); //real:298 practice: 56
+	public SwerveDriveModule m4 = new SwerveDriveModule(3, new TalonSRX(11), new CANSparkMax(2, MotorType.kBrushless), 355); //real: 355 practice: 190
 
 	/*
 	 * 0 is Front Right
@@ -22,15 +27,16 @@ public class SwerveDriveSubsystem extends HolonomicDrivetrain {
 	 * 3 is Back Right
 	 */
 	private SwerveDriveModule[] mSwerveModules = new SwerveDriveModule[] {                            
-		new SwerveDriveModule(0, new TalonSRX(12), new CANSparkMax(4, MotorType.kBrushless), 390), //real:390 practice: 212
-		new SwerveDriveModule(1, new TalonSRX(13), new CANSparkMax(5, MotorType.kBrushless), 293), //real:293 practice: 59
-		new SwerveDriveModule(2, new TalonSRX(10), new CANSparkMax(3, MotorType.kBrushless), 298), //real:298 practice: 56
-		new SwerveDriveModule(3, new TalonSRX(11), new CANSparkMax(2, MotorType.kBrushless), 355) //real: 355 practice: 190
+		//new SwerveDriveModule(0, new TalonSRX(12), new CANSparkMax(4, MotorType.kBrushless), 390), //real:390 practice: 212
+		//new SwerveDriveModule(1, new TalonSRX(13), new CANSparkMax(5, MotorType.kBrushless), 293), //real:293 practice: 59
+		//new SwerveDriveModule(2, new TalonSRX(10), new CANSparkMax(3, MotorType.kBrushless), 298), //real:298 practice: 56
+		//new SwerveDriveModule(3, new TalonSRX(11), new CANSparkMax(2, MotorType.kBrushless), 355) //real: 355 practice: 190
+		m1,m2,m3,m4
 	};
 
 	public AHRS mNavX = new AHRS(SPI.Port.kMXP, (byte) 200);
 
-	public SwerveDriveSubsystem() {
+	public SwerveDriveSubsystem() { // add PID controll stuff for Drive Motors
 		zeroGyro(); 
 
 		mSwerveModules[0].getDriveMotor().setInverted(false); //real: false
@@ -140,19 +146,24 @@ public class SwerveDriveSubsystem extends HolonomicDrivetrain {
 		}
 	}
 
-	public void driveForwardDistance(double targetPos, double angle, double speed){
+	public void driveForwardDistance(double targetPos, double angle){ // inches
 		double angleError = ((angle - mNavX.getYaw()) / 180)*10;
 
 		angleError = Math.min(angleError, 1);
 		angleError = Math.max(angleError, -1);
-		holonomicDrive(speed, 0, 0);
+		targetPos = (targetPos * 8.5714)/(4*Math.PI); //inches to ticks
+		for (int i = 0; i < 4; i++) {
+				mSwerveModules[i].setTargetAngle(angle); //mSwerveModules[i].getTargetAngle());
+				mSwerveModules[i].setTargetDistance(targetPos+mSwerveModules[i].getDriveMotor().getEncoder().getPosition());
+			}
+			
 	} // 2/12/19 3:37 PM i want boba and a burrito so bad right now !!!!!!!!!
 
 	public void driveSidewaysDistance(double targetPos, double angle, double speed) {
 		double angleError = ((angle - mNavX.getYaw()) / 180)*10;
 		angleError = Math.min(angleError, 1);
 		angleError = Math.max(angleError, -1);
-		holonomicDrive(0, speed, angleError);
+		//holonomicDrive(0, speed, angleError);
 	}
 
 	public double calculateErrPos(double d1) {

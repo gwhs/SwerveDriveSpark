@@ -24,7 +24,7 @@ public class DriveSidewaysDistance extends Command {
 
   @Override
   protected void execute() {
-    Robot.swerveDriveSubsystem.driveForwardDistance(d1, startAngle, speed);
+    Robot.swerveDriveSubsystem.driveForwardDistance(d1, startAngle);
   }
 
   @Override
