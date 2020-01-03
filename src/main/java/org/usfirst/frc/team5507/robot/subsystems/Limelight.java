@@ -7,8 +7,6 @@
 
 package org.usfirst.frc.team5507.robot.subsystems;
 
-import java.util.ArrayList;
-
 import org.usfirst.frc.team5507.robot.Robot;
 import org.usfirst.frc.team5507.robot.commands.ShowLimelight;
 

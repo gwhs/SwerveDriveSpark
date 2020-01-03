@@ -12,8 +12,6 @@ import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc.team5507.robot.Robot;
 
-import com.kauailabs.navx.frc.AHRS;
-
 public class FrontArmDown extends Command {
   private boolean isEnded;
   private Timer time = new Timer();

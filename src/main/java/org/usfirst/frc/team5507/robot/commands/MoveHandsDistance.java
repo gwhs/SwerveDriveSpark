@@ -7,8 +7,6 @@
 
 package org.usfirst.frc.team5507.robot.commands;
 
-import com.revrobotics.ControlType;
-
 import org.usfirst.frc.team5507.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;

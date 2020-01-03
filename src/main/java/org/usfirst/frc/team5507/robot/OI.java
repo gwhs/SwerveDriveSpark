@@ -1,13 +1,9 @@
 package org.usfirst.frc.team5507.robot;
 
 import org.usfirst.frc.team5507.robot.commands.*;
-import org.usfirst.frc.team5507.robot.input.DPadButton;
 import org.usfirst.frc.team5507.robot.input.IGamepad;
 import org.usfirst.frc.team5507.robot.input.XboxGamepad;
 import org.usfirst.frc.team5507.robot.input.DPadButton.Direction;
-import org.usfirst.frc.team5507.robot.subsystems.HolonomicDrivetrain;
-
-import edu.wpi.first.wpilibj.XboxController;
 
 /**
  * This class is the glue that binds the controls on the physical operator

@@ -1,8 +1,5 @@
 package org.usfirst.frc.team5507.robot.subsystems;
 
-import org.usfirst.frc.team5507.robot.Robot;
-import org.usfirst.frc.team5507.robot.input.XboxGamepad;
-
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;

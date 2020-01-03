@@ -9,7 +9,6 @@ package org.usfirst.frc.team5507.robot.commands;
 
 import org.usfirst.frc.team5507.robot.Robot;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class HatchPushBack extends Command {

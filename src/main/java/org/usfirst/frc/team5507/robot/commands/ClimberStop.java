@@ -8,7 +8,6 @@
 package org.usfirst.frc.team5507.robot.commands;
 
 import org.usfirst.frc.team5507.robot.Robot;
-import org.usfirst.frc.team5507.robot.subsystems.Climber;
 
 import edu.wpi.first.wpilibj.command.Command;
 

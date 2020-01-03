@@ -8,7 +8,6 @@
 package org.usfirst.frc.team5507.robot.subsystems;
 
 import org.usfirst.frc.team5507.robot.commands.CargoIn;
-import org.usfirst.frc.team5507.robot.commands.CargoOut;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
